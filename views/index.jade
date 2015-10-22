@@ -7,7 +7,7 @@ block content
         input(id="formInput", type="text", value="", placeholder="#{id}", autofocus)
         // input(id="formInput", type="text", value="", placeholder="#shitidontlike", autofocus)
     script(type='text/javascript').
-        var vocalizerRef = new Firebase('https://shitlike.firebaseio.com/');
+        var vocalizerRef = new Firebase('https://verbalizer.firebaseio.com/');
         var myRootRef = vocalizerRef.child("#{id}");
         var shitCount = 16;
 
@@ -15,7 +15,7 @@ block content
             $("#formInput").keypress(function (e){
                 if ((e.which && e.which ==13)||(e.keyCode && e.keyCode ==13)){
                     $('button[type=submit] .default').click();
-                    speakShit(document.getElementById("formInput").value);
+                    //speakShit(document.getElementById("formInput").value);
                     myRootRef.push().set({shit:document.getElementById("formInput").value});
                     document.getElementById("formInput").value = "";
                     return false;
@@ -26,6 +26,7 @@ block content
         });
 
         function speakShit(shitidontlike) {
+            console.log("speakShit");
             var text = shitidontlike;
             var amplitude = 100;
             var pitch = 200;
@@ -49,6 +50,8 @@ block content
                     var message = snapshot.name(), a = snapshot.val();
                     if (shitCount > 0) shitCount--;
                     if (shitCount == 0) { speakShit(a.shit); }
+                    console.log(shitCount);
+                    //speakShit(a.shit);
                     $("<li class='slideshit'>"+a.shit+"</li>").prependTo("#shit");
                     $('.slideshit').hide();
                     $('.slideshit').slideDown();
