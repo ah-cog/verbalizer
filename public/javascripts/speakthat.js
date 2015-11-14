@@ -1,4 +1,5 @@
 meSpeak.loadConfig("mespeak_config.json");
+meSpeak.loadVoice("voices/de.json");
 meSpeak.loadVoice("voices/en/en.json");
 
 function loadVoice(id) {
